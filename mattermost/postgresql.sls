@@ -15,6 +15,24 @@ setup_init_db:
     - watch:
       - pkg: postgresql_packages
 
+postgres_config:
+  file.managed:
+    - name: /var/lib/pgsql/data/postgresql.conf
+    - source: salt://mattermost/files/postgresql.conf.centos
+    - template: jinja
+    - mode: 755
+    - user: root
+    - group: root
+
+postgres_hba_config:
+  file.managed:
+    - name: /var/lib/pgsql/data/pg_hba.conf
+    - source: salt://mattermost/files/pg_hba.conf
+    - template: jinja
+    - mode: 755
+    - user: root
+    - group: root
+
 {% elif grains['os_family'] == 'Debian' %}
 
 postgresql_packages:
@@ -23,23 +41,25 @@ postgresql_packages:
       - postgresql
       - postgresql-contrib
 
-{% endif %}
-
-/etc/postgresql/9.5/main/postgresql.conf:
+postgres_config:
   file.managed:
+    - name: /etc/postgresql/9.5/main/postgresql.conf
     - source: salt://mattermost/files/postgresql.conf
     - template: jinja
     - mode: 755
     - user: root
     - group: root
 
-/etc/postgresql/9.5/main/pg_hba.conf:
+postgres_hba_config:
   file.managed:
+    - name: /etc/postgresql/9.5/main/pg_hba.conf
     - source: salt://mattermost/files/pg_hba.conf
     - template: jinja
     - mode: 755
     - user: root
     - group: root
+
+{% endif %}
 
 postgresql:
   service.running:
@@ -47,8 +67,8 @@ postgresql:
     - require:
       - pkg: postgresql_packages
     - watch:
-      - file: /etc/postgresql/9.5/main/postgresql.conf
-      - file: /etc/postgresql/9.5/main/pg_hba.conf
+      - file: postgres_config
+      - file: postgres_hba_config
 
 gogs_postgresql_db:
   postgres_user.present:

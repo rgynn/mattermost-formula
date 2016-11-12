@@ -9,7 +9,7 @@ mattermost_archive:
     - archive_format: tar
     - user: {{ config['run_user'] }}
     - group: {{ config['run_user'] }}
-    - if_missing: {{ config['install_dir'] }}/mattermost
+    - if_missing: {{ config['install_dir'] }}/bin/platform
     - require:
       - user: mattermost
 

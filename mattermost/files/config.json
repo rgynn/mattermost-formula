@@ -1,10 +1,11 @@
 {% from "mattermost/map.jinja" import mattermost with context %}
 {% set config = mattermost.config %}
 {% set db = mattermost.postgresql %}
+{% set server = mattermost.server %}
 {
     "ServiceSettings": {
         "SiteURL": "",
-        "ListenAddress": ":{{ config['port'] }}",
+        "ListenAddress": ":{{ server['http_port'] }}",
         "MaximumLoginAttempts": 10,
         "SegmentDeveloperKey": "",
         "GoogleDeveloperKey": "",

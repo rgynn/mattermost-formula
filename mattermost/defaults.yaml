@@ -8,7 +8,6 @@ mattermost:
     install_dir: '/opt/mattermost'
     data_dir: '/opt/mattermost/data'
     log_dir: '/var/log/mattermost'
-    port: 8065
     site_name: 'Mattermost'
   postgresql:
     database: 'mattermost'
@@ -17,6 +16,7 @@ mattermost:
     port: 5432
   server:
     domain: 'mattermost.example.com'
+    http_port: 8065
   nginx:
     ssl_cert: '/etc/pki/tls/certs/localhost.crt'
     ssl_key: '/etc/pki/tls/certs/localhost.key'
