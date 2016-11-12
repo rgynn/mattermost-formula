@@ -1,0 +1,8 @@
+{% import_yaml "mattermost/defaults.yaml" as default_settings %}
+
+{% set mattermost = salt['pillar.get'](
+    'mattermost',
+    default=default_settings.mattermost,
+    merge=True
+  )
+%}

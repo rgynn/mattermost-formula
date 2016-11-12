@@ -1,0 +1,19 @@
+mattermost:
+  config:
+    version: '3.4.0'
+    extract_archive_dir: '/opt'
+    hash_type: 'md5'
+    hash: 'efbb80aa22e97f1916ab5d795c1cf10c'
+    run_user: 'mattermost'
+    install_dir: '/opt/mattermost'
+    data_dir: '/opt/mattermost/data'
+    log_dir: '/var/log/mattermost'
+    port: 8065
+    site_name: 'Mattermost'
+  postgresql:
+    database: 'mattermost'
+    user: 'mmuser'
+    password: 'mmuser_password'
+    port: 5432
+  server:
+    domain: 'mattermost.example.com'
